@@ -1,7 +1,6 @@
 #include "lardataobj/MCBase/MCShower.h"
 
 #include <stdexcept> // std::out_of_range
-#include <string> // std::out_of_range
 
 namespace sim {
 
@@ -39,7 +38,7 @@ namespace sim {
     fAncestorEnd     = invalid_step;
 
     fDetProfile = invalid_step;
-    
+
     fDaughterTrackID.clear();
     fPlaneCharge.clear();
     fdEdx = kINVALID_DOUBLE;

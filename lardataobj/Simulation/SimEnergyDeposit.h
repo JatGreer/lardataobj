@@ -1,55 +1,50 @@
 ////////////////////////////////////////////////////////////////////////
-/// \file  SimEnergyDeposit.h
+/// \file  lardataobj/Simulation/SimEnergyDeposit.h
 /// \brief contains information for a single step in the detector simulation
 ///
-/// \author  Hans Wenzel and William Seligman
+/// \authors Hans Wenzel and William Seligman
 ////////////////////////////////////////////////////////////////////////
-//
-// The detector simulation (presently LArG4, which invokes Geant4)
-// propagates particles through the detector in intervals of "steps". 
-// In Geant4, a step is normally defined by the smallest of the distance
-// from the current position of the particle to the point where it
-// enters a new volume boundary, the particle undergoes some "interesting"
-// physics event, or the range of the particle due to its energy falls
-// below a given limit.
-//
-// In LArG4, an additional limit is applied: We force the steps to be
-// small (typically 1/10th the wire spacing in the planes of the TPC)
-// so we can process the energy deposited by each step into
-// electron clusters. 
-//
-// The SimEnergyDeposit class defines what Geant4 truth information for
-// each step is passed to the ionization->sim::SimChannel conversion,
-// and for the optical-photon->sim::SimPhoton conversion. 
-// 
-// William Seligman, Nevis Labs, 10/12/2017
-//
-
-#ifndef SimEnergyDeposit_h
-#define SimEnergyDeposit_h
+#ifndef LARDATAOBJ_SIMULATION_SIMENERGYDEPOSIT_H
+#define LARDATAOBJ_SIMULATION_SIMENERGYDEPOSIT_H
 
 // LArSoft includes
 // Define the LArSoft standard geometry types and methods.
 #include "larcoreobj/SimpleTypesAndConstants/geo_vectors.h"
 
-// ROOT includes
-#include "Math/GenVector/Cartesian3D.h"
-#include "Math/GenVector/PositionVector3D.h"
-#include "Math/GenVector/PxPyPzE4D.h" 
-#include "Math/GenVector/LorentzVector.h" 
-
 // C++ includes
-#include <iostream>
 #include <vector>
+
+
 namespace sim
 {
-  class SimEnergyDeposit 
+  /**
+   * @brief Energy deposition in the active material.
+   * 
+   * The detector simulation (presently LArG4, which invokes Geant4)
+   * propagates particles through the detector in intervals of "steps".
+   * In Geant4, a step is normally defined by the smallest of the distance
+   * from the current position of the particle to the point where it
+   * enters a new volume boundary, the particle undergoes some "interesting"
+   * physics event, or the range of the particle due to its energy falls
+   * below a given limit.
+   *
+   * In `LArG4`, an additional limit is applied: We force the steps to be
+   * small (typically 1/10th the wire spacing in the planes of the TPC)
+   * so we can process the energy deposited by each step into
+   * electron clusters.
+   *
+   * The SimEnergyDeposit class defines what Geant4 truth information for
+   * each step is passed to the ionization -> `sim::SimChannel` conversion,
+   * and for the optical-photon -> `sim::SimPhoton` conversion.
+   *
+   * _William Seligman, Nevis Labs, 10/12/2017_
+   */
+  class SimEnergyDeposit
   {
   public:
 
-    // Define the types for the private members below. 
+    // Define the types for the private members below.
     using Length_t = float;
-    //using Point_t = ROOT::Math::PositionVector3D< ROOT::Math::Cartesian3D<Length_t> >;
     using Point_t = geo::Point_t;
 
     // Since we're using LArSoft geometry types, the typical way to
@@ -59,13 +54,16 @@ namespace sim
     //   		           stepEnergy,
     //			           { startX, startY, startZ },
     //			           { endX,   endY,   endZ   },
-    //			           startTime, 
+    //			           startTime,
     //                             endTime,
     //			           trackID,
     //                             pdgCode);
 
     SimEnergyDeposit(int np = 0,
+//             int nfp = 0,
+//             int nsp = 0,
 		     int ne = 0,
+		     double sy = 0,
 		     double e = 0.,
 		     geo::Point_t start = {0.,0.,0.},
 		     geo::Point_t end = {0.,0.,0.},
@@ -74,7 +72,10 @@ namespace sim
 		     int id = 0,
 		     int pdg = 0)
       : numPhotons(np)
+//      , numFPhotons(nfp)
+//      , numSPhotons(nsp)
       , numElectrons(ne)
+      , scintYieldRatio(sy)
       , edep(e)
       , startPos(start)
       , endPos(end)
@@ -82,17 +83,19 @@ namespace sim
       , endTime(t1)
       , trackID(id)
       , pdgCode(pdg)
-    {}
+    {
+    }
 
 
-#ifndef __GCCXML__
-    // Accessors, hidden from the ROOT dictionary generation.
     // Note that even if we store a value as float, we return
     // it as double so the user doesn't have to think about
-    // precision issues. 
+    // precision issues.
 
     int NumPhotons() const { return numPhotons; }
+    int NumFPhotons() const { return round(numPhotons * scintYieldRatio); }
+    int NumSPhotons() const { return round(numPhotons * (1.0 - scintYieldRatio)); }
     int NumElectrons() const { return numElectrons; }
+    double ScintYieldRatio() const { return scintYieldRatio;}
     double Energy() const { return edep; }
     geo::Point_t Start() const { return { startPos.X(), startPos.Y(), startPos.Z() }; }
     geo::Point_t End() const { return { endPos.X(), endPos.Y(), endPos.Z() }; }
@@ -113,20 +116,20 @@ namespace sim
     geo::Length_t EndZ() const { return endPos.Z(); }
     double EndT() const { return endTime; }
 
-    // Step mid-point. 
+    // Step mid-point.
     geo::Point_t MidPoint() const {
-      return { 
-	  ( startPos.X() + endPos.X() )/2. 
+      return {
+	  ( startPos.X() + endPos.X() )/2.
 	, ( startPos.Y() + endPos.Y() )/2.
-	, ( startPos.Z() + endPos.Z() )/2. 
+	, ( startPos.Z() + endPos.Z() )/2.
 	    };
     }
-    geo::Length_t MidPointX() const { return ( startPos.X() + endPos.X() )/2.; } 
-    geo::Length_t MidPointY() const { return ( startPos.Y() + endPos.Y() )/2.; } 
-    geo::Length_t MidPointZ() const { return ( startPos.Z() + endPos.Z() )/2.; } 
-    geo::Length_t X() const { return ( startPos.X() + endPos.X() )/2.; } 
-    geo::Length_t Y() const { return ( startPos.Y() + endPos.Y() )/2.; } 
-    geo::Length_t Z() const { return ( startPos.Z() + endPos.Z() )/2.; } 
+    geo::Length_t MidPointX() const { return ( startPos.X() + endPos.X() )/2.; }
+    geo::Length_t MidPointY() const { return ( startPos.Y() + endPos.Y() )/2.; }
+    geo::Length_t MidPointZ() const { return ( startPos.Z() + endPos.Z() )/2.; }
+    geo::Length_t X() const { return ( startPos.X() + endPos.X() )/2.; }
+    geo::Length_t Y() const { return ( startPos.Y() + endPos.Y() )/2.; }
+    geo::Length_t Z() const { return ( startPos.Z() + endPos.Z() )/2.; }
     double T() const { return (startTime+endTime)/2.; }
     double T0() const { return startTime; }
     double T1() const { return endTime; }
@@ -154,8 +157,6 @@ namespace sim
 	&& edep > rhs.edep; // sort by _decreasing_ energy
     }
 
-#endif // __GCCXML__
-
   private:
     // While the accessors above return all values in double
     // precision, store whatever we can in single precision to save
@@ -168,7 +169,7 @@ namespace sim
     // or 10^-4m. With seven digits of precision, that means a float
     // can be accurate to up to the range of 10^3m. That's why the
     // definition of our local Point_t (see above) is based on float,
-    // while geo::Point_t is based on double. 
+    // while geo::Point_t is based on double.
 
     // If the above reasoning is wrong, just change the definition of
     // Length_t near the top of this file. Of course, also edit these
@@ -180,19 +181,21 @@ namespace sim
     // will take care of that, but let's make sure that any overlay studies
     // won't suffer due to lack of precision.
 
-    int           numPhotons;   //< of scintillation photons
-    int           numElectrons; //< of ionization electrons 
-    float         edep;         //< energy deposition (MeV)
-    geo::Point_t       startPos;     //< positions in (cm)
+    int           numPhotons;      ///< of scintillation photons
+//    int           numFPhotons;     ///< of fast scintillation photons
+//    int           numSPhotons;     ///< of slow scintillation photons
+    int           numElectrons;    ///< of ionization electrons
+    float         scintYieldRatio; ///< scintillation yield of LAr
+    float         edep;            ///< energy deposition (MeV)
+    geo::Point_t       startPos;     ///< positions in (cm)
     geo::Point_t       endPos;
-    double        startTime;    //< (ns)
-    double        endTime;      //< (ns)
-    int           trackID;      //< simulation track id
-    int           pdgCode;      //< pdg code of particle to avoid lookup by particle type later
+    double        startTime;    ///< (ns)
+    double        endTime;      ///< (ns)
+    int           trackID;      ///< simulation track id
+    int           pdgCode;      ///< pdg code of particle to avoid lookup by particle type later
   };
   /*
-#ifndef __GCCXML__
-  // Class utility functions. 
+  // Class utility functions.
 
   // The format of the sim::SimEnergyDeposit output. I'm using a
   // template for the ostream type, since LArSoft may have some
@@ -220,11 +223,10 @@ namespace sim
   // duplicating the objects in memory. The following definition
   // covers sorting the pointers.
   bool compareSED(const SimEnergyDeposit* const lhs, const SimEnergyDeposit* const rhs)
-  { 
-    return (*lhs) < (*rhs); 
+  {
+    return (*lhs) < (*rhs);
   }
-#endif // __GCCXML__
   */
   typedef std::vector<SimEnergyDeposit> SimEnergyDepositCollection;
 } // namespace sim
-#endif // SimEnergyDeposit_n
+#endif // LARDATAOBJ_SIMULATION_SIMENERGYDEPOSIT_H

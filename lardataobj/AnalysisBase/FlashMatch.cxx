@@ -6,12 +6,13 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "lardataobj/AnalysisBase/FlashMatch.h"
-#include "messagefacility/MessageLogger/MessageLogger.h"
+
+#include <ostream>
 
 namespace anab{
 
   //----------------------------------------------------------------------
-  FlashMatch::FlashMatch() 
+  FlashMatch::FlashMatch()
     : fChi2(0)
     , fFlashID(0)
     , fSubjectID(0)
@@ -33,7 +34,7 @@ namespace anab{
   }
 
   //----------------------------------------------------------------------
-  // ostream operator.  
+  // ostream operator.
   //
   std::ostream& operator<< (std::ostream & o, FlashMatch const& a)
   {
@@ -41,9 +42,9 @@ namespace anab{
       << "\n from flash: "            << a.fFlashID
       << "\n to object: "             << a.fSubjectID
       <<std::endl;
-    
+
 
     return o;
   }
-  
+
 }

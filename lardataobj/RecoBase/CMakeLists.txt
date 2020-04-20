@@ -1,18 +1,15 @@
+cet_make(LIBRARIES lardataobj_RawData
+                   canvas
+                   MF_MessageLogger
+                   cetlib_except
+                   ROOT::Physics
+                   ROOT::Matrix
+                   NO_DICTIONARY)
 
-cet_make( LIBRARIES lardataobj_RawData
-		    canvas
-		    MF_MessageLogger
-		    
-		    cetlib cetlib_except
-		    ${ROOT_MATHCORE}
-		    ${ROOT_GENVECTOR}
-		    ${ROOT_PHYSICS}
-		    ${ROOT_MATRIX}
-		    NO_DICTIONARY )
+art_dictionary(DICTIONARY_LIBRARIES lardataobj_RecoBase)
 
-art_dictionary( DICTIONARY_LIBRARIES lardataobj_RecoBase )
-
+add_subdirectory(AssnsDicts)
+add_subdirectory(TrackingDicts)
 
 install_headers(EXTRAS TrajectoryPointFlags.tcc TrackTrajectory.tcc Trajectory.tcc)
-install_fhicl()
 install_source(EXTRAS RecoBase.dox)

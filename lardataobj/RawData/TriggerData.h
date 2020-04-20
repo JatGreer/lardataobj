@@ -3,12 +3,11 @@
 #define TRIGGERDATA_H
 
 // C++ includes
-#include <vector>
+#include <stdint.h>
 #include <limits>
-#include <stdexcept>
-#include <iostream>
+
 namespace raw {
-  
+
   class Trigger {
 
   public:
@@ -17,15 +16,15 @@ namespace raw {
     Trigger()
     {
       fTriggerNumber       = std::numeric_limits<unsigned int>::max();
-      
+
       fTriggerTime         = std::numeric_limits<double>::max();
       fBeamGateTime        = std::numeric_limits<double>::max();
-      
+
       fTriggerBits         = 0x0;
     }
-    
+
   private:
-    
+
     unsigned int fTriggerNumber;       ///< Trigger counter
     double       fTriggerTime;         ///< Trigger time w.r.t. electronics clock T0
     double       fBeamGateTime;        ///< BeamGate time w.r.t. electronics clock T0
@@ -34,7 +33,7 @@ namespace raw {
   public:
 
 
-    /// Alternative constructor    
+    /// Alternative constructor
     Trigger(unsigned int counter,
 	    double       trigger_time,
 	    double       beamgate_time,
@@ -59,4 +58,4 @@ namespace raw {
   };
 }
 
-#endif 
+#endif

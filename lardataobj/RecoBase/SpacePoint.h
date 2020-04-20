@@ -15,7 +15,7 @@
 #include <iosfwd>
 
 #include "larcoreobj/SimpleTypesAndConstants/PhysicalConstants.h"
-#include <Rtypes.h>
+#include <RtypesCore.h>
 
 namespace recob {
 
@@ -23,10 +23,10 @@ namespace recob {
 
   public:
     using ID_t = int; ///< type of spacepoint ID
-    
+
     /// Special value for an invalid ID.
     static constexpr ID_t InvalidID = util::kBogusI;
-    
+
 
     SpacePoint();  ///Default constructor
 

@@ -1,15 +1,13 @@
-
 #ifndef MCWIRE_H
 #define MCWIRE_H
 
 // C++ includes
 #include <vector>
-#include <algorithm>
 #include <functional> // std::less
-#include "MCLimits.h"
+#include "lardataobj/MCBase/MCLimits.h"
 
 namespace sim {
-  
+
   class MCWire : public std::vector<double> {
 
   public:
@@ -39,7 +37,7 @@ namespace sim {
       SetStartTDC(start);
       SetWaveform(wf);
     }
-    
+
     /// Setter function for time
     void SetStartTDC(const unsigned int start)
     {
@@ -59,7 +57,7 @@ namespace sim {
 
     /// For sorting
     inline bool operator< ( const MCWire& rhs ) const { return fStartTDC < rhs.fStartTDC; }
-    
+
   };
 }
 
@@ -74,4 +72,4 @@ namespace std {
   };
 }
 
-#endif 
+#endif

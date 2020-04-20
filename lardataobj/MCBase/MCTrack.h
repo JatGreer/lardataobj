@@ -2,7 +2,7 @@
  * \file MCTrack.h
  *
  * \ingroup MCBase
- * 
+ *
  * \brief Class def header for mctrack data container
  *
  * @author Kazu - Nevis 2014
@@ -16,7 +16,7 @@
 #define MCTRACK_H
 
 #include <vector>
-#include "MCStep.h"
+#include "lardataobj/MCBase/MCStep.h"
 #include "nusimdata/SimulationBase/MCTruth.h"
 
 namespace sim{
@@ -25,12 +25,12 @@ namespace sim{
      \class MCTrack
   */
   class MCTrack : public std::vector<sim::MCStep> {
-    
+
   public:
-    
+
     /// Default constructor
     MCTrack() : std::vector<sim::MCStep>() {Clear();}
-    
+
     /// Default destructor
     virtual ~MCTrack(){}
 
@@ -107,4 +107,4 @@ namespace sim{
 }
 #endif
 
-/** @} */ // end of doxygen group 
+/** @} */ // end of doxygen group

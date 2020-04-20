@@ -3,7 +3,7 @@
  * @brief Declaration of signal hit object.
  * @author mitchell.soderberg@yale.edu
  * @see  lardataobj/RecoBase/Hit.cxx
- * 
+ *
  * Changes:
  * 20141212 Gianluca Petrillo (petrillo@fnal.gov)
  *   data architecture revision changes (v13 -> v14):
@@ -15,11 +15,15 @@
  * 20150129 Gianluca Petrillo (petrillo@fnal.gov)
  *   data architecture revision changes (v14 -> v15):
  *   - removed fHitSignal
+<<<<<<< HEAD
  * 
  *
  * Joel Greer jgreer_FPGA_Hitfinding feature branch. Redefining a hit to also
  * have the capability of storing information about summed ADC in configurable 
  * tick length regions before and after it
+=======
+ *
+>>>>>>> develop
  * ****************************************************************************/
 
 #ifndef LARDATAOBJ_RECOBASE_HIT_H
@@ -27,8 +31,7 @@
 
 
 // C/C++ standard librraies
-#include <vector>
-# include <iosfwd>
+#include <iosfwd>
 
 // LArSoft libraries
 #include "larcoreobj/SimpleTypesAndConstants/geo_types.h" // geo::View_t, geo::SignalType, geo::WireID
@@ -45,7 +48,7 @@ namespace recob {
    * They identify a charge deposit in a specific location and time;
    * the location is absolute and unique in the detector, while the time is
    * relative to the start of sampling (tick time).
-   * 
+   *
    * The version 14 of recob::Hit introduces the following changes:
    * - StartTime() becomes StartTick(), StopTime() becomes StopTick()
    * - Charge(true) is now PeakAmplitude(), Charge(false) (default) is Integral()
@@ -54,9 +57,9 @@ namespace recob {
     public:
       /// Default constructor: a hit with no signal
       Hit();
-      
+
     private:
-      
+
       raw::ChannelID_t        fChannel;        ///< ID of the readout channel the hit was extracted from
       raw::TDCtick_t          fStartTick;      ///< initial tdc tick for hit
       raw::TDCtick_t          fEndTick;        ///< final tdc tick for hit
@@ -87,7 +90,7 @@ namespace recob {
       bool                    fContinues;      ///< does hit continue up to last adc sample in packet. If yes->true
 
       friend class HitCreator; // helper to create hits
-      
+
     public:
       /**
        * @brief Constructor: directly sets all the fields
@@ -143,63 +146,64 @@ namespace recob {
        	float  	       	       	summedADC8,
         bool                    continues
         );
-      
+
       /// @{
       /// @name Accessors
-      
+
       /// Initial tdc tick for hit
       raw::TDCtick_t          StartTick()                 const;
-      
+
       /// Final tdc tick for hit
       raw::TDCtick_t          EndTick()                   const;
-      
+
       /// Time of the signal peak, in tick units
       float                   PeakTime()                  const;
-      
+
       /// Uncertainty for the signal peak, in tick units
       float                   SigmaPeakTime()             const;
-      
+
       /// RMS of the hit shape, in tick units
       float                   RMS()                       const;
-      
+
       /// The estimated amplitude of the hit at its peak, in ADC units
       float                   PeakAmplitude()             const;
-      
+
       /// Uncertainty on estimated amplitude of the hit at its peak, in ADC units
       float                   SigmaPeakAmplitude()        const;
-      
+
       /// The sum of calibrated ADC counts of the hit (0. by default)
       float                   SummedADC()                 const;
-      
+
       /// Integral under the calibrated signal waveform of the hit, in tick x ADC units
       float                   Integral()                  const;
-      
+
       ///< Uncertainty of integral under the calibrated signal waveform of the hit, in ADC units
       float                   SigmaIntegral()             const;
-      
+
       /// How many hits could this one be shared with
       short int               Multiplicity()              const;
-      
+
       ///< Index of this hit among the Multiplicity() hits in the signal window (-1 by default)
       short int               LocalIndex()                const;
-      
+
       ///< How well do we believe we know this hit?
       float                   GoodnessOfFit()             const;
-      
+
       ///< Degrees of freedom in the determination of the hit signal shape (-1 by default)
       int                     DegreesOfFreedom()          const;
-      
+
       /// ID of the readout channel the hit was extracted from
       raw::ChannelID_t        Channel()                   const;
-      
+
       /// View for the plane of the hit
       geo::View_t             View()                      const;
-      
+
       /// Signal type for the plane of the hit
       geo::SigType_t          SignalType()                const;
-      
+
       ///< ID of the wire the hit is on (Cryostat, TPC, Plane, Wire)
       geo::WireID             WireID()                    const;
+<<<<<<< HEAD
       
       /// The sum of calibrated ADC counts earliest before hit (0. by default)
       float                   SummedADC1()                 const;
@@ -227,9 +231,11 @@ namespace recob {
 
       /// Bool true if hit continues up to last adc sample in packet
       bool                    Continues()                  const;
+=======
+>>>>>>> develop
 
       /// @}
-      
+
       //@{
       /**
        * @brief Returns a time sigmas RMS away from the peak time
@@ -238,7 +244,7 @@ namespace recob {
        *
        * PeakTimePlusRMS() returns PeakTime() + sigmas x RMS();
        * PeakTimeMinusRMS() returns PeakTime() - sigmas x RMS().
-       * 
+       *
        * @note StartTime() of recob::Hit version <=13 was defined by
        *   GausHitFinder to be PeakTimePlusRMS(-1.), and EndTime() was
        *   PeakTimePlusRMS(+1.).
@@ -246,7 +252,7 @@ namespace recob {
       float                   PeakTimePlusRMS(float sigmas = +1.) const;
       float                   PeakTimeMinusRMS(float sigmas = +1.) const;
       //@}
-      
+
       /**
        * @brief Returns the distance of the specified time from peak, in RMS units
        * @param time the time, in TDC tick units
@@ -256,11 +262,11 @@ namespace recob {
        * There is no protection in case RMS is 0!
        */
       float                   TimeDistanceAsRMS(float time) const;
-      
-      
+
+
       friend std::ostream&  operator << (std::ostream & o, const Hit & a);
       friend bool           operator <  (const Hit & a, const Hit & b);
-      
+
   }; // class Hit
 } // namespace recob
 

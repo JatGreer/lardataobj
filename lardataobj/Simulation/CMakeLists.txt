@@ -1,16 +1,13 @@
+cet_make(NO_DICTIONARY
+         LIBRARIES
+           nusimdata_SimulationBase
+           canvas
+           MF_MessageLogger
+           ROOT::Core
+           ROOT::Physics
+         )
 
-cet_make( LIBRARIES nusimdata_SimulationBase
-                    canvas
-                    MF_MessageLogger
-                    
-                    cetlib cetlib_except
-                    ${ROOT_BASIC_LIB_LIST}
-          NO_DICTIONARY 
-                    ${ROOT_BASIC_LIB_LIST}
-)
-
-art_dictionary( DICTIONARY_LIBRARIES lardataobj_Simulation )
+art_dictionary(DICTIONARY_LIBRARIES lardataobj_Simulation)
 
 install_headers()
-install_fhicl()
 install_source()

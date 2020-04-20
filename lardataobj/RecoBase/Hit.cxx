@@ -3,7 +3,7 @@
  * @brief Definition of signal hit object.
  * @author mitchell.soderberg@yale.edu
  * @see  lardataobj/RecoBase/Hit.h
- * 
+ *
  * ****************************************************************************/
 
 // Hit header
@@ -12,11 +12,9 @@
 // C/C++ standard library
 #include <iomanip>
 #include <ostream>
-#include <utility> // std::move()
-
 
 namespace recob {
-  
+
   //----------------------------------------------------------------------
   Hit::Hit()
     : fChannel(raw::InvalidChannelID)
@@ -47,7 +45,7 @@ namespace recob {
     , fSummedADC8(0.)
     , fContinues(false)
     {}
-  
+
   //----------------------------------------------------------------------
   Hit::Hit(
     raw::ChannelID_t        channel,
@@ -106,8 +104,8 @@ namespace recob {
     , fSummedADC8(summedADC8)
     , fContinues(continues)
   {}
-  
-  
+
+
   //----------------------------------------------------------------------
   // ostream operator.
   //
@@ -133,8 +131,8 @@ namespace recob {
       << std::endl;
     return o;
   } // operator<< (std::ostream, Hit)
-  
-  
+
+
   //----------------------------------------------------------------------
   // < operator.
   //
@@ -149,8 +147,8 @@ namespace recob {
 
     return false; //They are equal
   } // operator< (Hit, Hit)
-  
-  
+
+
   //----------------------------------------------------------------------
 } // namespace recob
 

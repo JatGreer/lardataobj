@@ -3,7 +3,7 @@
  * @brief  Definition of Principal Components Axis object for LArSoft.
  * @author Tracy Usher (usher@slac.stanford.edu)
  * @see    Edge.h
- * 
+ *
  */
 
 
@@ -11,13 +11,13 @@
 
 // C/C++ standard libraries
 #include <iomanip>
-#include <iostream>
 #include <cmath> // std::sqrt()
+#include <ostream>
 
-namespace { 
-  
+namespace {
+
   double sqr(double v) { return v*v; }
-  
+
   double spacePointDistance
     (recob::SpacePoint const& a, recob::SpacePoint const& b)
   {
@@ -42,7 +42,7 @@ Edge::Edge(const double length, SpacePointID_t firstPointID, SpacePointID_t seco
   fID(id)
 {
 }
-  
+
 //----------------------------------------------------------------------
 Edge::Edge(SpacePoint const& firstPoint, SpacePoint const& secondPoint,
           ID_t id /* = InvalidID */):
@@ -52,7 +52,7 @@ Edge::Edge(SpacePoint const& firstPoint, SpacePoint const& secondPoint,
   fID(id)
 {
 }
-  
+
 //----------------------------------------------------------------------
 // ostream operator.
 //
@@ -61,9 +61,8 @@ std::ostream& operator<< (std::ostream & o, const Edge & a)
     o << std::setiosflags(std::ios::fixed) << std::setprecision(2);
     o << " Edge ID " << a.ID() << " has length " << std::setw(6) << a.Length() << " cm" << std::endl;
     o << "   - First Point ID: " << a.FirstPointID() << ", second point ID: " << a.SecondPointID() << std::endl;
-    
+
     return o;
 }
 
 } // End of namespace
-

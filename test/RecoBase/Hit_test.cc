@@ -9,14 +9,12 @@
  * can access are the right ones.
  *
  * See http://www.boost.org/libs/test for the Boost test library home page.
- * 
+ *
  * Timing:
  * version 1.0: ~1.5" (debug mode)
  */
 
 // C/C++ standard library
-#include <vector>
-#include <algorithm> // std::equal(), std::accumulate()
 #include <numeric> // std::accumulate
 
 // Boost libraries
@@ -76,36 +74,36 @@ void CheckHit(
   float                     summedADC8,
   bool                      continues
 ) {
-  
+
   // verify that the values are as expected
   // - channel ID
   BOOST_CHECK_EQUAL(hit.Channel(), channel);
-  
+
   // - view
   BOOST_CHECK_EQUAL(hit.View(), view);
-  
+
   // - signal type
   BOOST_CHECK_EQUAL(hit.SignalType(), signal_type);
-  
+
   // - start and end tick
   BOOST_CHECK_EQUAL(hit.StartTick(), start_tick);
   BOOST_CHECK_EQUAL(hit.EndTick(), end_tick);
-  
+
   // - peak
   BOOST_CHECK_EQUAL(hit.PeakTime(), peak_time);
   BOOST_CHECK_EQUAL(hit.SigmaPeakTime(), sigma_peak_time);
   BOOST_CHECK_EQUAL(hit.PeakAmplitude(), peak_amplitude);
   BOOST_CHECK_EQUAL(hit.SigmaPeakAmplitude(), sigma_peak_amplitude);
-  
+
   // the following comparisons are at 0.01%
   BOOST_CHECK_CLOSE(hit.PeakTimePlusRMS(), peak_time + rms, 0.01);
   BOOST_CHECK_CLOSE(hit.PeakTimeMinusRMS(), peak_time - rms, 0.01);
-  
+
   for (float shift: { 0.0, 0.5, 1.0, 1.5, 2.0, 2.2 }) {
-    
+
     const float time_up   = peak_time + shift*rms;
     const float time_down = peak_time - shift*rms;
-    
+
     if (time_up == 0.) {
       BOOST_CHECK_SMALL(hit.PeakTimePlusRMS(shift), 0.01F);
       BOOST_CHECK_SMALL(hit.PeakTimeMinusRMS(-shift), 0.01F);
@@ -114,7 +112,7 @@ void CheckHit(
       BOOST_CHECK_CLOSE(hit.PeakTimePlusRMS(shift), time_up, 0.01F);
       BOOST_CHECK_CLOSE(hit.PeakTimeMinusRMS(-shift), time_up, 0.01F);
     }
-    
+
     if (time_down == 0.) {
       BOOST_CHECK_SMALL(hit.PeakTimePlusRMS(shift), 0.01F);
       BOOST_CHECK_SMALL(hit.PeakTimeMinusRMS(-shift), 0.01F);
@@ -123,7 +121,7 @@ void CheckHit(
       BOOST_CHECK_CLOSE(hit.PeakTimeMinusRMS(shift), time_down, 0.01F);
       BOOST_CHECK_CLOSE(hit.PeakTimePlusRMS(-shift), time_down, 0.01F);
     }
-    
+
     if (rms > 0.) {
       if (shift == 0.) {
         BOOST_CHECK_SMALL(hit.TimeDistanceAsRMS(time_up), 0.01F);
@@ -134,37 +132,40 @@ void CheckHit(
         BOOST_CHECK_CLOSE(hit.TimeDistanceAsRMS(time_down), -shift, 0.01F);
       }
     } // if rms is not 0
-    
+
   } // for
-  
+
   // - width
   BOOST_CHECK_EQUAL(hit.RMS(), rms);
-  
+
   // - charge
   BOOST_CHECK_EQUAL(hit.SummedADC(), summedADC);
   BOOST_CHECK_EQUAL(hit.Integral(), hit_integral);
   BOOST_CHECK_EQUAL(hit.SigmaIntegral(), hit_sigma_integral);
+<<<<<<< HEAD
   //could also add checking for ie: BOOST_CHECK_EQUAL(hit.SummedADC1(),summedADC1);etc  
 
+=======
+>>>>>>> develop
 
   // - multiplicity
   BOOST_CHECK_EQUAL(hit.Multiplicity(), multiplicity);
   BOOST_CHECK_EQUAL(hit.LocalIndex(), local_index);
   BOOST_CHECK
     ((hit.LocalIndex() < hit.Multiplicity()) || (hit.LocalIndex() == -1));
-  
+
   // - fit quality
   BOOST_CHECK_EQUAL(hit.GoodnessOfFit(), goodness_of_fit);
   BOOST_CHECK_EQUAL(hit.DegreesOfFreedom(), dof);
-  
+
   // - wire ID
   BOOST_CHECK_EQUAL(hit.WireID(), wireID);
-  
+
 } // CheckHit()
 
 
 void HitTestDefaultConstructor() {
-  
+
   //
   // Part I: initialization of wire inputs
   //
@@ -187,6 +188,7 @@ void HitTestDefaultConstructor() {
   geo::View_t        view                  =    geo::kUnknown;
   geo::SigType_t     signal_type           =    geo::kMysteryType;
   geo::WireID        wireID;
+<<<<<<< HEAD
   float              summedADC1            =    0.0;
   float              summedADC2            =    0.0;
   float              summedADC3            =    0.0;
@@ -196,13 +198,15 @@ void HitTestDefaultConstructor() {
   float              summedADC7            =    0.0;
   float              summedADC8            =    0.0;
   bool               continues             =    false;
+=======
+>>>>>>> develop
 
   //
   // Part II: default constructor
   //
   // step II.1: create a hit with the default constructor
   recob::Hit hit;
-  
+
   // step II.2: verify that the values are as expected
   CheckHit(hit,
     channel,
@@ -233,12 +237,12 @@ void HitTestDefaultConstructor() {
     summedADC8,
     continues
     );
-  
+
 } // HitTestDefaultConstructor()
 
 
 void HitTestCustomConstructors() {
-  
+
   //
   // Part I: initialization of wire inputs
   //
@@ -268,6 +272,7 @@ void HitTestCustomConstructors() {
   geo::View_t        view                  =    geo::kU;
   geo::SigType_t     signal_type           =    geo::kCollection;
   geo::WireID        wireID(0, 1, 2, 546);
+<<<<<<< HEAD
   float              summedADC1            = 0.0;
   float              summedADC2            = 0.0;
   float              summedADC3            = 0.0;
@@ -277,6 +282,9 @@ void HitTestCustomConstructors() {
   float              summedADC7            = 0.0;
   float              summedADC8            = 0.0;
   bool               continues             = false;  
+=======
+
+>>>>>>> develop
 
   //
   // Part II: complete constructor
@@ -311,7 +319,7 @@ void HitTestCustomConstructors() {
     summedADC8,
     continues
     );
-  
+
   // step II.2: verify that the values are as expected
   CheckHit(hit1,
     channel,
@@ -342,7 +350,7 @@ void HitTestCustomConstructors() {
     summedADC8,
     continues
     );
-  
+
 } // HitTestCustomConstructors()
 
 

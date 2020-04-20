@@ -1,0 +1,392 @@
+<!--                                                                                  -->
+<!--  $Author:  $                                                                     -->
+<!--  $Date: 2010/04/12 18:12:28 $                                                    -->
+<!--                                                                                  -->
+<!--  Include art::Wrapper lines for objects that we would like to put into the event -->
+<!--  Include the non-wrapper lines for all objects on the art::Wrapper lines and     -->
+<!--  for all objects that are data members of those objects.                         -->
+<!--   recob::SpacePoint                                                              -->
+<!--   recob::Trajectory                                                              -->
+<!--   recob::TrackTrajectory                                                         -->
+<!--   recob::Track                                                                   -->
+<!--   recob::TrajectoryPointFlags                                                    -->
+<!--   recob::TrackHitMeta                                                            -->
+
+
+<lcgdict>
+  <class name="vector<ROOT::Math::PositionVector3D<ROOT::Math::Cartesian3D<Double32_t>,ROOT::Math::GlobalCoordinateSystemTag>>"/>
+  <class name="vector<ROOT::Math::DisplacementVector3D<ROOT::Math::Cartesian3D<Double32_t>,ROOT::Math::GlobalCoordinateSystemTag>>"/>
+  <class name="std::vector<TMatrixT<double>>"/>
+  <class name="std::vector<TVector3>"/>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- recob::SpacePoint -->
+  <class name="recob::SpacePoint" ClassVersion="13">
+    <version ClassVersion="13" checksum="905613236"/>
+    <version ClassVersion="12" checksum="4256037352"/>
+  </class>
+  <class name="art::Ptr<recob::SpacePoint>"/>
+  <class name="art::PtrVector<recob::SpacePoint>"/>
+  <class name="std::vector< art::PtrVector<recob::SpacePoint>>"/>
+  <class name="std::vector<recob::SpacePoint>"/>
+  <class name="art::Wrapper< std::vector< recob::SpacePoint>>"/>
+  <class name="art::Wrapper< std::vector< art::PtrVector<recob::SpacePoint>>>"/>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- recob::Trajectory -->
+
+  <!--   class -->
+  <class name="recob::Trajectory" ClassVersion="12">
+   <version ClassVersion="12" checksum="3480475097"/>
+   <version ClassVersion="11" checksum="2541107521"/>
+   <version ClassVersion="10" checksum="3286658271"/>
+  </class>
+
+    <!-- art pointers and wrappers -->
+  <class name="art::Ptr<recob::Trajectory>"/>
+  <class name="std::vector<recob::Trajectory>"/>
+  <class name="art::Wrapper<std::vector<recob::Trajectory>>"/>
+
+    <!-- associations and wrappers -->
+      <!-- hits -->
+  <class name="art::Assns<recob::Hit, recob::Trajectory, void>"/>
+  <class name="art::Assns<recob::Trajectory, recob::Hit, void>"/>
+  <class name="std::pair<art::Ptr<recob::Hit>, art::Ptr<recob::Trajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Hit, recob::Trajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Trajectory>, art::Ptr<recob::Hit>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Trajectory, recob::Hit, void>>"/>
+      <!-- clusters -->
+  <class name="art::Assns<recob::Cluster, recob::Trajectory, void>"/>
+  <class name="art::Assns<recob::Trajectory, recob::Cluster, void>"/>
+  <class name="std::pair<art::Ptr<recob::Cluster>, art::Ptr<recob::Trajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Cluster, recob::Trajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Trajectory>, art::Ptr<recob::Cluster>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Trajectory, recob::Cluster, void>>"/>
+      <!-- tracks -->
+  <class name="art::Assns<recob::Track, recob::Trajectory, void>"/>
+  <class name="art::Assns<recob::Trajectory, recob::Track, void>"/>
+  <class name="std::pair<art::Ptr<recob::Track>, art::Ptr<recob::Trajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Track, recob::Trajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Trajectory>, art::Ptr<recob::Track>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Trajectory, recob::Track, void>>"/>
+      <!-- showers -->
+  <class name="art::Assns<recob::Shower, recob::Trajectory, void>"/>
+  <class name="art::Assns<recob::Trajectory, recob::Shower, void>"/>
+  <class name="std::pair<art::Ptr<recob::Shower>, art::Ptr<recob::Trajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Shower, recob::Trajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Trajectory>, art::Ptr<recob::Shower>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Trajectory, recob::Shower, void>>"/>
+      <!-- vertex -->
+  <class name="art::Assns<recob::Vertex, recob::Trajectory, void>"/>
+  <class name="art::Assns<recob::Trajectory, recob::Vertex, void>"/>
+  <class name="std::pair<art::Ptr<recob::Vertex>, art::Ptr<recob::Trajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Vertex, recob::Trajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Trajectory>, art::Ptr<recob::Vertex>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Trajectory, recob::Vertex, void>>"/>
+      <!-- space point -->
+  <class name="art::Assns<recob::SpacePoint, recob::Trajectory, void>"/>
+  <class name="art::Assns<recob::Trajectory, recob::SpacePoint, void>"/>
+  <class name="std::pair<art::Ptr<recob::SpacePoint>, art::Ptr<recob::Trajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::SpacePoint, recob::Trajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Trajectory>, art::Ptr<recob::SpacePoint>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Trajectory, recob::SpacePoint, void>>"/>
+      <!-- particle flow -->
+  <class name="art::Assns<recob::PFParticle, recob::Trajectory, void>"/>
+  <class name="art::Assns<recob::Trajectory, recob::PFParticle, void>"/>
+  <class name="std::pair<art::Ptr<recob::PFParticle>, art::Ptr<recob::Trajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::PFParticle, recob::Trajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Trajectory>, art::Ptr<recob::PFParticle>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Trajectory, recob::PFParticle, void>>"/>
+      <!-- multiple coulomb scattering -->
+  <class name="art::Assns<recob::MCSFitResult, recob::Trajectory, void>"/>
+  <class name="art::Assns<recob::Trajectory, recob::MCSFitResult, void>"/>
+  <class name="std::pair<art::Ptr<recob::MCSFitResult>, art::Ptr<recob::Trajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::MCSFitResult, recob::Trajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Trajectory>, art::Ptr<recob::MCSFitResult>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Trajectory, recob::MCSFitResult, void>>"/>
+
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- recob::TrackTrajectory -->
+  <!--   dependencies -->
+  <class name="recob::TrajectoryPointFlagTraits"/>
+  <class name="recob::TrajectoryPointFlags"/>
+  <class name="std::vector<recob::TrajectoryPointFlags>"/>
+  <class name="util::flags::Bits_t<unsigned int>"/>
+  <class name="util::flags::BitMask<unsigned int>"/>
+  <class name="util::flags::FlagSet<32U, unsigned int>"/>
+
+  <!--   class -->
+  <class name="recob::TrackTrajectory" ClassVersion="11">
+   <version ClassVersion="11" checksum="239891311"/>
+   <version ClassVersion="10" checksum="4198737063"/>
+  </class>
+
+    <!-- art pointers and wrappers -->
+  <class name="art::Ptr<recob::TrackTrajectory>"/>
+  <class name="std::vector<recob::TrackTrajectory>"/>
+  <class name="art::Wrapper<std::vector<recob::TrackTrajectory>>"/>
+
+    <!-- associations and wrappers -->
+      <!-- hits -->
+  <class name="art::Assns<recob::Hit, recob::TrackTrajectory, void>"/>
+  <class name="art::Assns<recob::TrackTrajectory, recob::Hit, void>"/>
+  <class name="std::pair<art::Ptr<recob::Hit>, art::Ptr<recob::TrackTrajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Hit, recob::TrackTrajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::TrackTrajectory>, art::Ptr<recob::Hit>>"/>
+  <class name="art::Wrapper<art::Assns<recob::TrackTrajectory, recob::Hit, void>>"/>
+      <!-- clusters -->
+  <class name="art::Assns<recob::Cluster, recob::TrackTrajectory, void>"/>
+  <class name="art::Assns<recob::TrackTrajectory, recob::Cluster, void>"/>
+  <class name="std::pair<art::Ptr<recob::Cluster>, art::Ptr<recob::TrackTrajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Cluster, recob::TrackTrajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::TrackTrajectory>, art::Ptr<recob::Cluster>>"/>
+  <class name="art::Wrapper<art::Assns<recob::TrackTrajectory, recob::Cluster, void>>"/>
+      <!-- trajectories -->
+  <class name="art::Assns<recob::Trajectory, recob::TrackTrajectory, void>"/>
+  <class name="art::Assns<recob::TrackTrajectory, recob::Trajectory, void>"/>
+  <class name="std::pair<art::Ptr<recob::Trajectory>, art::Ptr<recob::TrackTrajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Trajectory, recob::TrackTrajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::TrackTrajectory>, art::Ptr<recob::Trajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::TrackTrajectory, recob::Trajectory, void>>"/>
+      <!-- tracks -->
+  <class name="art::Assns<recob::Track, recob::TrackTrajectory, void>"/>
+  <class name="art::Assns<recob::TrackTrajectory, recob::Track, void>"/>
+  <class name="std::pair<art::Ptr<recob::Track>, art::Ptr<recob::TrackTrajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Track, recob::TrackTrajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::TrackTrajectory>, art::Ptr<recob::Track>>"/>
+  <class name="art::Wrapper<art::Assns<recob::TrackTrajectory, recob::Track, void>>"/>
+      <!-- showers -->
+  <class name="art::Assns<recob::Shower, recob::TrackTrajectory, void>"/>
+  <class name="art::Assns<recob::TrackTrajectory, recob::Shower, void>"/>
+  <class name="std::pair<art::Ptr<recob::Shower>, art::Ptr<recob::TrackTrajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Shower, recob::TrackTrajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::TrackTrajectory>, art::Ptr<recob::Shower>>"/>
+  <class name="art::Wrapper<art::Assns<recob::TrackTrajectory, recob::Shower, void>>"/>
+      <!-- vertex -->
+  <class name="art::Assns<recob::Vertex, recob::TrackTrajectory, void>"/>
+  <class name="art::Assns<recob::TrackTrajectory, recob::Vertex, void>"/>
+  <class name="std::pair<art::Ptr<recob::Vertex>, art::Ptr<recob::TrackTrajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Vertex, recob::TrackTrajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::TrackTrajectory>, art::Ptr<recob::Vertex>>"/>
+  <class name="art::Wrapper<art::Assns<recob::TrackTrajectory, recob::Vertex, void>>"/>
+      <!-- space point -->
+  <class name="art::Assns<recob::SpacePoint, recob::TrackTrajectory, void>"/>
+  <class name="art::Assns<recob::TrackTrajectory, recob::SpacePoint, void>"/>
+  <class name="std::pair<art::Ptr<recob::SpacePoint>, art::Ptr<recob::TrackTrajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::SpacePoint, recob::TrackTrajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::TrackTrajectory>, art::Ptr<recob::SpacePoint>>"/>
+  <class name="art::Wrapper<art::Assns<recob::TrackTrajectory, recob::SpacePoint, void>>"/>
+      <!-- particle flow -->
+  <class name="art::Assns<recob::PFParticle, recob::TrackTrajectory, void>"/>
+  <class name="art::Assns<recob::TrackTrajectory, recob::PFParticle, void>"/>
+  <class name="std::pair<art::Ptr<recob::PFParticle>, art::Ptr<recob::TrackTrajectory>>"/>
+  <class name="art::Wrapper<art::Assns<recob::PFParticle, recob::TrackTrajectory, void>>"/>
+  <class name="std::pair<art::Ptr<recob::TrackTrajectory>, art::Ptr<recob::PFParticle>>"/>
+  <class name="art::Wrapper<art::Assns<recob::TrackTrajectory, recob::PFParticle, void>>"/>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- recob::Track -->
+    <!-- dependencies -->
+
+    <!-- class -->
+  <class name="recob::Track" ClassVersion="17">
+   <version ClassVersion="17" checksum="738708267"/>
+   <version ClassVersion="16" checksum="1293628079"/>
+   <version ClassVersion="15" checksum="2420564911"/>
+    <version ClassVersion="14" checksum="2345363916"/>
+  </class>
+
+    <!-- schema evolution rules -->
+      <!-- version 15 -->
+        <!-- * trajectory -->
+  <ioread
+    version="[-14]"
+    sourceClass="recob::Track"
+    source="std::vector<TVector3> fXYZ; std::vector<TVector3> fDir; std::vector<double> fFitMomentum"
+    targetClass="recob::Track"
+    target="fTraj"
+    include="lardataobj/RecoBase/Track.h;TVector3.h;vector;stdexcept">
+    <![CDATA[
+      // also uses "larcoreobj/SimpleTypesAndConstants/PhysicalConstants.h" // util::kBogusD
+
+      // trajectory
+      if((onfile.fXYZ.size() != onfile.fDir.size()) || onfile.fXYZ.size()<2) {
+         std::cerr
+         << "\n *** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "
+         << "\n **** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "
+         << "\n *** "
+         << "\n ***  ERROR!! ROOT I/O failure. "
+         << "\n ***  Trying to read from file a recob::Track with only " << onfile.fXYZ.size() << " points. "
+         << "\n ***  The data product containing this track is UNUSABLE. "
+         << "\n ***  In case of questions contact cerati@fnal.gov and petrillo@fnal.gov. "
+         << "\n ***  (printed from: lardataobj/RecoBase/classes_def.xml) "
+         << "\n *** "
+         << "\n **** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "
+         << "\n *** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "
+         << "\n" << std::endl;
+        throw std::runtime_error(
+          "Direction and position vector size mismatch during import of Track v. <=14"
+          );
+      }
+
+      // prepare vector of positions
+      recob::Track::Positions_t pos;
+      pos.reserve(onfile.fXYZ.size());
+      for (auto const& p: onfile.fXYZ)
+        pos.emplace_back(p.X(), p.Y(), p.Z());
+
+      // prepare vector of directions
+      recob::Track::Momenta_t mom;
+      mom.reserve(onfile.fDir.size());
+      for (auto const& d: onfile.fDir)
+        mom.emplace_back(d.X(), d.Y(), d.Z());
+
+      // upgrade to momentum if the input track has exactly two momenta,
+      // or if it has exactly the number of momenta required
+      auto const size = mom.size();
+      bool hasMom = false;
+      if ((onfile.fFitMomentum.size() == 2)
+        && (onfile.fFitMomentum[0] != util::kBogusD)
+        && (onfile.fFitMomentum[1]!=util::kBogusD)
+        )
+      {
+        hasMom = true;
+        for (unsigned int i = 0; i < (size - 1); ++i)
+          mom[i] *= onfile.fFitMomentum[0];
+        mom.back() *= onfile.fFitMomentum[1];
+      }
+      else if (onfile.fFitMomentum.size() == size) {
+        hasMom = true;
+        for (unsigned int i = 0; i < size; ++i)
+          mom[i] *= onfile.fFitMomentum[i];
+      }
+
+      // reinitialise the trajectory data member
+      fTraj = recob::TrackTrajectory(
+        std::move(pos), std::move(mom),
+        recob::TrackTrajectory::Flags_t(size),
+        hasMom
+        );
+    ]]>
+  </ioread>
+
+    <!-- art pointers and wrappers -->
+  <class name="art::Ptr<recob::Track>"/>
+  <class name="std::vector<recob::Track>"/>
+  <class name="art::Wrapper<std::vector<recob::Track>>"/>
+
+  <class name="art::PtrVector<recob::Track>"/>
+  <class name="std::vector<art::PtrVector<recob::Track>>"/>
+  <class name="art::Wrapper<std::vector<art::PtrVector<recob::Track>>>"/>
+
+    <!-- associations and wrappers -->
+      <!-- hits -->
+  <class name="art::Assns<recob::Hit, recob::Track, void>"/>
+  <class name="art::Assns<recob::Track, recob::Hit, void>"/>
+  <class name="std::pair<art::Ptr<recob::Hit>, art::Ptr<recob::Track>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Hit, recob::Track, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Track>, art::Ptr<recob::Hit>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Track, recob::Hit, void>>"/>
+      <!-- clusters -->
+  <class name="art::Assns<recob::Cluster, recob::Track, void>"/>
+  <class name="art::Assns<recob::Track, recob::Cluster, void>"/>
+  <class name="std::pair<art::Ptr<recob::Cluster>, art::Ptr<recob::Track>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Cluster, recob::Track, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Track>, art::Ptr<recob::Cluster>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Track, recob::Cluster, void>>"/>
+      <!-- showers -->
+  <class name="art::Assns<recob::Shower, recob::Track, void>"/>
+  <class name="art::Assns<recob::Track, recob::Shower, void>"/>
+  <class name="std::pair<art::Ptr<recob::Shower>, art::Ptr<recob::Track>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Shower, recob::Track, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Track>, art::Ptr<recob::Shower>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Track, recob::Shower, void>>"/>
+      <!-- vertex -->
+  <class name="art::Assns<recob::Vertex, recob::Track, void>"/>
+  <class name="art::Assns<recob::Track, recob::Vertex, void>"/>
+  <class name="std::pair<art::Ptr<recob::Vertex>, art::Ptr<recob::Track>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Vertex, recob::Track, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Track>, art::Ptr<recob::Vertex>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Track, recob::Vertex, void>>"/>
+      <!-- space point -->
+  <class name="art::Assns<recob::SpacePoint, recob::Track, void>"/>
+  <class name="art::Assns<recob::Track, recob::SpacePoint, void>"/>
+  <class name="std::pair<art::Ptr<recob::SpacePoint>, art::Ptr<recob::Track>>"/>
+  <class name="art::Wrapper<art::Assns<recob::SpacePoint, recob::Track, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Track>, art::Ptr<recob::SpacePoint>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Track, recob::SpacePoint, void>>"/>
+      <!-- particle flow -->
+  <class name="art::Assns<recob::PFParticle, recob::Track, void>"/>
+  <class name="art::Assns<recob::Track, recob::PFParticle, void>"/>
+  <class name="std::pair<art::Ptr<recob::PFParticle>, art::Ptr<recob::Track>>"/>
+  <class name="art::Wrapper<art::Assns<recob::PFParticle, recob::Track, void>>"/>
+  <class name="std::pair<art::Ptr<recob::Track>, art::Ptr<recob::PFParticle>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Track, recob::PFParticle, void>>"/>
+      <!-- optical flash -->
+    <!-- in recob::OpFlash -->
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- recob::TrackHitMeta (metadata) -->
+
+    <!--   class -->
+  <class name="recob::TrackHitMeta"/>
+
+    <!-- art pointers and wrappers -->
+  <class name="std::vector<recob::TrackHitMeta>"/>
+  <class name="art::Ptr<recob::TrackHitMeta>"/>
+
+    <!-- associations and wrappers -->
+      <!-- Hits <==> Tracks -->
+  <class name="art::Assns<recob::Hit, recob::Track, recob::TrackHitMeta>"/>
+  <class name="art::Assns<recob::Track, recob::Hit, recob::TrackHitMeta>"/>
+  <class name="art::Wrapper<art::Assns<recob::Hit, recob::Track, recob::TrackHitMeta>>"/>
+  <class name="art::Wrapper<art::Assns<recob::Track, recob::Hit, recob::TrackHitMeta>>"/>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- recob::PointCharge -->
+
+    <!--   class -->
+  <class name="recob::PointCharge" ClassVersion="10">
+   <version ClassVersion="10" checksum="3152949279"/>
+  </class>
+
+    <!-- art pointers and wrappers -->
+      <!-- data product collection (recob::PointCharge) -->
+  <class name="art::Ptr<recob::PointCharge>"/>
+  <class name="std::vector<recob::PointCharge>"/>
+  <class name="art::Wrapper<std::vector<recob::PointCharge>>"/>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- copy&paste templates for: -->
+  <!-- PROD -->
+
+    <!--   class -->
+  <!--
+  <class name="PROD"/>
+  -->
+
+    <!-- art pointers and wrappers -->
+      <!-- data product collection (PROD) -->
+  <!--
+  <class name="art::Ptr<PROD>"/>
+  <class name="std::vector<PROD>"/>
+  <class name="art::Wrapper<std::vector<PROD>>"/>
+    -->
+
+    <!-- associations and wrappers (PROD <==> OTHER) -->
+  <!--
+  <class name="art::Assns<PROD, OTHER, void>"/>
+  <class name="art::Assns<OTHER, PROD, void>"/>
+  <class name="std::pair<art::Ptr<PROD>, art::Ptr<OTHER>>"/>
+  <class name="art::Wrapper<art::Assns<OTHER, PROD, void>>"/>
+  <class name="std::pair<art::Ptr<OTHER>, art::Ptr<PROD>>"/>
+  <class name="art::Wrapper<art::Assns<OTHER, PROD, void>>"/>
+    -->
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+</lcgdict>

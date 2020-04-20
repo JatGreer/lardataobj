@@ -6,13 +6,15 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "lardataobj/AnalysisBase/Calorimetry.h"
-#include "messagefacility/MessageLogger/MessageLogger.h"
 #include "cetlib_except/exception.h"
+
+#include <iostream>
+#include <iomanip>
 
 namespace anab{
 
   //----------------------------------------------------------------------
-  Calorimetry::Calorimetry() 
+  Calorimetry::Calorimetry()
     : fKineticEnergy(0.)
     , fRange(0.)
   {
@@ -34,9 +36,9 @@ namespace anab{
 			   std::vector<float> const& deadwire,
 			   float Range,
 			   float TrkPitch,
-			   geo::PlaneID planeID) 
+			   geo::PlaneID planeID)
   {
- 
+
     fKineticEnergy = KineticEnergy;
     fRange = Range;
     for(size_t i=0; i!=dQdx.size(); ++i){
@@ -54,7 +56,7 @@ namespace anab{
       fdQdx[i]          = dQdx[i];
       fResidualRange[i] = resRange[i];
     }
-    
+
     fDeadWireResR.resize(deadwire.size());
     for(size_t i = 0; i<deadwire.size(); ++i){
       fDeadWireResR[i] = deadwire[i];
@@ -72,9 +74,9 @@ namespace anab{
 			   std::vector<float> const& deadwire,
 			   float Range,
 			   std::vector<float> const& TrkPitch,
-			   geo::PlaneID planeID) 
+			   geo::PlaneID planeID)
   {
-    
+
     fPlaneID = planeID;
     fKineticEnergy = KineticEnergy;
     fRange = Range;
@@ -93,7 +95,7 @@ namespace anab{
       fdQdx[i]          = dQdx[i];
       fResidualRange[i] = resRange[i];
     }
-    
+
     fDeadWireResR.resize(deadwire.size());
     for(size_t i = 0; i<deadwire.size(); ++i){
       fDeadWireResR[i] = deadwire[i];
@@ -110,7 +112,7 @@ namespace anab{
 			   float Range,
 			   std::vector<float> const& TrkPitch,
 			   std::vector<anab::Point_t> const& XYZ,
-			   geo::PlaneID planeID) 
+			   geo::PlaneID planeID)
     : Calorimetry(KineticEnergy, dEdx, dQdx, resRange, deadwire, Range, TrkPitch, XYZ, std::vector<size_t>(),planeID) { }
   //----------------------------------------------------------------------
   Calorimetry::Calorimetry(float KineticEnergy,
@@ -124,7 +126,7 @@ namespace anab{
 			   std::vector<size_t> const& TpIndices,
 			   geo::PlaneID planeID)
   {
-    
+
     if( dEdx.size() != resRange.size() ||
         dEdx.size() != dQdx.size()     ||
         dEdx.size() != TrkPitch.size() ||
@@ -145,16 +147,16 @@ namespace anab{
   }
 
   //----------------------------------------------------------------------
-  // ostream operator.  
+  // ostream operator.
   //
   std::ostream& operator<< (std::ostream & o, Calorimetry const& a)
   {
-    o << "Kinetic Energy: " << a.fKineticEnergy 
+    o << "Kinetic Energy: " << a.fKineticEnergy
       << "\n Range: "         << a.fRange << std::endl;
-    
+
     for(size_t n = 0; n < a.fdEdx.size(); ++n)
       o << "dE/dx="           << a.fdEdx[n]
-	<< " Residual range=" << a.fResidualRange[n] 
+	<< " Residual range=" << a.fResidualRange[n]
 	<< " dQ/dx=" << a.fdQdx[n]
 	<< " (x,y,z)=(" << a.fXYZ[n].X() << "," << a.fXYZ[n].Y() << "," << a.fXYZ[n].Z() << ")"
 	<< " pitch=" << a.fTrkPitch[n]
@@ -163,5 +165,5 @@ namespace anab{
 
     return o;
   }
-  
+
 }

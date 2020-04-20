@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// \version 
+// \version
 //
 // \brief Data products to hold feature vectors and their metadata, see MVAReader/MVAWriter wrappers for convenient usage.
 //
@@ -11,10 +11,9 @@
 
 #include "cetlib_except/exception.h"
 #include <iosfwd>
-#include <iostream>
-#include <iomanip>
 
 #include <array>
+#include <string>
 #include <vector>
 
 namespace anab {
@@ -56,7 +55,7 @@ public:
     {
         o << "FeatureVector values:";
         for (size_t i = 0; i < N; ++i) { o << " " << a.fData[i]; }
-        o << std::endl; 
+        o << std::endl;
         return o;
     }
 
@@ -170,4 +169,3 @@ using FVecDescription = MVADescription<N>;
 } // namespace anab
 
 #endif //ANAB_FEATUREVECTORS
-

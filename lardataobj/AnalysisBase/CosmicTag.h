@@ -11,10 +11,6 @@
 
 #include <vector>
 #include <iosfwd>
-#include <iostream>
-#include <iomanip>
-
-
 
 namespace anab {
 
@@ -39,17 +35,17 @@ namespace anab {
 
   class CosmicTag{
   public:
-    
+
     CosmicTag();
-      
+
   private:
 
     std::vector<float> endPt1; // x,y,z assuming t_0 = t_beam
     std::vector<float> endPt2; // x,y,z assuming t_0 = t_beam
-    float fCosmicScore; // -1 means very likely neutrino, 
-                        // 0 means probably not a cosmic (or unknown), 
+    float fCosmicScore; // -1 means very likely neutrino,
+                        // 0 means probably not a cosmic (or unknown),
                         // 1 means cosmic
-    CosmicTagID_t fCosmicType; 
+    CosmicTagID_t fCosmicType;
 
   public:
 
@@ -73,7 +69,7 @@ namespace anab {
     const std::vector<float>& EndPoint2()   const;
     const float&              CosmicScore() const;
     const CosmicTagID_t&      CosmicType()  const;
-    
+
   };
 
 }

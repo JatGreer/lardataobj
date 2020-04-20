@@ -9,12 +9,10 @@
 #ifndef RB_SLICE_H
 #define RB_SLICE_H
 
-
-#include <iosfwd>
 #include "lardataobj/RecoBase/TrackingTypes.h"
 
 namespace recob {
-  
+
   class Slice  {
 
   public:
@@ -22,7 +20,7 @@ namespace recob {
     using Point_t = tracking::Point_t;
     using Vector_t  = tracking::Vector_t;
 
-    Slice(); // Needed to hide constexpr from GCCXML.
+    Slice(); // Needed for ROOT persistency.
 
     Slice(int id, Point_t center, Vector_t direction, Point_t end0Pos, Point_t end1Pos, float aspectratio, float charge)
     : fID(id), fCenter(center), fDirection(direction), fEnd0Pos(end0Pos), fEnd1Pos(end1Pos), fAspectRatio(aspectratio), fCharge(charge)
@@ -45,10 +43,10 @@ namespace recob {
     void                 SetCharge(const float charge) {fCharge = charge;}
 
   private:
-    
+
     int       fID;           ///< id for this slice
     Point_t   fCenter;       ///< Center of the slice for flash matching
-    Vector_t  fDirection;    ///< direction from a linear fit 
+    Vector_t  fDirection;    ///< direction from a linear fit
     Point_t   fEnd0Pos;      ///< Position of a SpacePoint at one end of the slice
     Point_t   fEnd1Pos;      ///< Position of the other end
     float     fAspectRatio;  ///< absolute value of the linear correlation coefficient (0 = round blob, 1 = line)

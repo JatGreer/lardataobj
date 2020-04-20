@@ -5,7 +5,7 @@
 /// \author brebel@fnal.gov
 ///
 ///
-/// Coding note: Never put '#include "sim.h"' in your code. It would
+/// Coding note: Never put `#include "sim.h"` in your code. It would
 /// force a dependency in your class on every other class in the
 /// Simulation directory; e.g., if I changed the MCTruth code, your
 /// code that generates Electrons would re-compile.  This class exists
@@ -18,7 +18,7 @@
 #include "TRandom3.h"
 
 ///Monte Carlo Simulation
-namespace sim{ 
+namespace sim{
 
   unsigned int GetRandomNumberSeed();
 
@@ -26,7 +26,7 @@ namespace sim{
   // associated particle was too low-energy to be written by the
   // detector Monte Carlo.
   static const int NoParticleId = std::numeric_limits<int>::min();
-  
+
 }
 
 inline unsigned int sim::GetRandomNumberSeed(){
