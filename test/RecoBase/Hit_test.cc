@@ -142,11 +142,8 @@ void CheckHit(
   BOOST_CHECK_EQUAL(hit.SummedADC(), summedADC);
   BOOST_CHECK_EQUAL(hit.Integral(), hit_integral);
   BOOST_CHECK_EQUAL(hit.SigmaIntegral(), hit_sigma_integral);
-<<<<<<< HEAD
   //could also add checking for ie: BOOST_CHECK_EQUAL(hit.SummedADC1(),summedADC1);etc  
 
-=======
->>>>>>> develop
 
   // - multiplicity
   BOOST_CHECK_EQUAL(hit.Multiplicity(), multiplicity);
@@ -188,7 +185,6 @@ void HitTestDefaultConstructor() {
   geo::View_t        view                  =    geo::kUnknown;
   geo::SigType_t     signal_type           =    geo::kMysteryType;
   geo::WireID        wireID;
-<<<<<<< HEAD
   float              summedADC1            =    0.0;
   float              summedADC2            =    0.0;
   float              summedADC3            =    0.0;
@@ -198,8 +194,6 @@ void HitTestDefaultConstructor() {
   float              summedADC7            =    0.0;
   float              summedADC8            =    0.0;
   bool               continues             =    false;
-=======
->>>>>>> develop
 
   //
   // Part II: default constructor
@@ -272,7 +266,6 @@ void HitTestCustomConstructors() {
   geo::View_t        view                  =    geo::kU;
   geo::SigType_t     signal_type           =    geo::kCollection;
   geo::WireID        wireID(0, 1, 2, 546);
-<<<<<<< HEAD
   float              summedADC1            = 0.0;
   float              summedADC2            = 0.0;
   float              summedADC3            = 0.0;
@@ -282,9 +275,6 @@ void HitTestCustomConstructors() {
   float              summedADC7            = 0.0;
   float              summedADC8            = 0.0;
   bool               continues             = false;  
-=======
-
->>>>>>> develop
 
   //
   // Part II: complete constructor

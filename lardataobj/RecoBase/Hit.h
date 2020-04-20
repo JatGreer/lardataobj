@@ -15,15 +15,11 @@
  * 20150129 Gianluca Petrillo (petrillo@fnal.gov)
  *   data architecture revision changes (v14 -> v15):
  *   - removed fHitSignal
-<<<<<<< HEAD
  * 
  *
  * Joel Greer jgreer_FPGA_Hitfinding feature branch. Redefining a hit to also
  * have the capability of storing information about summed ADC in configurable 
  * tick length regions before and after it
-=======
- *
->>>>>>> develop
  * ****************************************************************************/
 
 #ifndef LARDATAOBJ_RECOBASE_HIT_H
@@ -203,7 +199,6 @@ namespace recob {
 
       ///< ID of the wire the hit is on (Cryostat, TPC, Plane, Wire)
       geo::WireID             WireID()                    const;
-<<<<<<< HEAD
       
       /// The sum of calibrated ADC counts earliest before hit (0. by default)
       float                   SummedADC1()                 const;
@@ -231,8 +226,6 @@ namespace recob {
 
       /// Bool true if hit continues up to last adc sample in packet
       bool                    Continues()                  const;
-=======
->>>>>>> develop
 
       /// @}
 
