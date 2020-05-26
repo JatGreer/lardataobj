@@ -41,6 +41,12 @@ find_ups_product( nusimdata )
 find_ups_boost( )
 find_ups_root()
 find_ups_product( cetbuildtools )
+find_ups_product( nutools v1_00_00 )
+find_ups_product( nuevdb )
+find_ups_product( nug4 )
+find_ups_product( nugen )
+find_ups_product( genie )
+find_ups_product( nurandom )
 
 # macros for artdaq_dictionary and simple_plugin
 include(ArtDictionary)
